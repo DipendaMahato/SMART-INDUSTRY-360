@@ -36,6 +36,7 @@ services:
     container_name: smart-industry-frontend
     restart: unless-stopped
     ports:
+      - "5173:80"
       - "80:80"
     depends_on:
       - backend

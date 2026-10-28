@@ -167,9 +167,25 @@ flowchart LR
 
 ## 🚀 4. Quick Start Guide
 
-### Option A: Using Docker (Fastest)
+> ⚠️ **Important Note on Local Browser Links**:
+> The links below (`http://localhost:5173` and `http://localhost:8000/docs`) run on your **local machine**. To access them, you must first start the servers using **Option A (1-Click)**, **Option B (Docker)**, or **Option C (Manual)** below. If the servers are not running yet, your browser will show `ERR_CONNECTION_REFUSED`.
 
-Run the entire platform (backend, frontend, database, and edge simulator) in one command:
+---
+
+### Option A: 1-Click Startup on Windows (Easiest)
+
+Simply double-click **`start.bat`** in the project root, or run it in your terminal:
+
+```powershell
+.\start.bat
+```
+*This automatically launches both the FastAPI backend and React Vite frontend in separate terminal windows and opens [http://localhost:5173](http://localhost:5173) in your default browser.*
+
+---
+
+### Option B: Using Docker Compose
+
+Run the complete full-stack environment (FastAPI backend, React frontend, Mosquitto MQTT broker, and edge simulator) in a single command:
 
 ```bash
 # Clone the repository
@@ -179,16 +195,17 @@ cd SMART-INDUSTRY-360
 # Launch all microservices
 docker compose -f deployment/docker-compose.yml up --build
 ```
-- **Control Center Dashboard**: [http://localhost:5173](http://localhost:5173)
+- **Control Center Dashboard**: [http://localhost:5173](http://localhost:5173) (or [http://localhost](http://localhost))
 - **FastAPI Interactive Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **API Health Check**: [http://localhost:8000/api/health](http://localhost:8000/api/health)
 
 ---
 
-### Option B: Local Manual Setup (Without Docker)
+### Option C: Manual Terminal Setup
 
 #### Prerequisites
-- **Python**: 3.12 or higher
-- **Node.js**: 20 or higher & npm
+- **Python**: 3.12 or higher (`python --version`)
+- **Node.js**: 20 or higher & npm (`node -v`)
 
 #### Step 1: Start the Backend
 ```powershell
@@ -201,20 +218,24 @@ pip install -r requirements.txt
 # Start FastAPI with Uvicorn
 uvicorn backend.main:app --host 127.0.0.1 --port 8000 --reload
 ```
-> *On initial startup, `smart_industry.db` is generated and seeded automatically, and the real-time plant telemetry simulator starts immediately.*
+> *On initial startup, `smart_industry.db` is initialized and seeded automatically with 8 roles and demo zones.*
 
 #### Step 2: Start the Frontend
-In a new terminal window:
+In a separate terminal window:
 ```powershell
 cd "d:\Smart Industry 360\frontend"
 
-# Install dependencies
+# Install dependencies (first time only)
 npm install
 
-# Start development server
+# Start Vite development server
 npm run dev
 ```
-Open **[http://localhost:5173](http://localhost:5173)** in your browser.
+
+Once running, navigate to:
+- 🌐 **Web Application**: **[http://localhost:5173](http://localhost:5173)**
+- 📚 **FastAPI Swagger Docs**: **[http://localhost:8000/docs](http://localhost:8000/docs)**
+- 🩺 **Backend Health API**: **[http://localhost:8000/api/health](http://localhost:8000/api/health)**
 
 ---
 

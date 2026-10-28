@@ -1,5 +1,11 @@
+import os
+os.environ["SIMULATION_ENABLED"] = "false"
+
 import pytest
 from fastapi.testclient import TestClient
+from backend.config import settings
+settings.SIMULATION_ENABLED = False
+
 from backend.main import app
 from backend.database import SessionLocal, Base, engine
 from database.seed_data import seed_database
