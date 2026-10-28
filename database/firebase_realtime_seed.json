@@ -1,0 +1,844 @@
+{
+  "plants": {
+    "1": {
+      "id": 1,
+      "name": "Detroit Advanced Powertrain Mega-Factory",
+      "code": "DET-01",
+      "location": "1200 Industrial Parkway, Detroit, MI, USA",
+      "timezone": "America/Detroit",
+      "latitude": 42.3314,
+      "longitude": -83.0458,
+      "is_active": true,
+      "created_at": "2026-10-28T18:00:00Z"
+    },
+    "2": {
+      "id": 2,
+      "name": "Houston Petrochemical & Polymer Facility",
+      "code": "HOU-02",
+      "location": "4500 Refinery Row, Houston, TX, USA",
+      "timezone": "America/Chicago",
+      "latitude": 29.7604,
+      "longitude": -95.3698,
+      "is_active": true,
+      "created_at": "2026-10-28T18:00:00Z"
+    }
+  },
+
+  "zones": {
+    "1": {
+      "id": 1,
+      "plant_id": 1,
+      "name": "Machining & Milling Hall A",
+      "code": "BAY-A",
+      "floor_level": "Floor 1",
+      "zone_type": "PRODUCTION",
+      "max_occupancy": 45,
+      "current_occupancy": 22,
+      "is_evacuation_route": true,
+      "hazard_status": "CLEAR",
+      "created_at": "2026-10-28T18:00:00Z"
+    },
+    "2": {
+      "id": 2,
+      "plant_id": 1,
+      "name": "Chemical Reactor & Solvent Bay",
+      "code": "BAY-CHEM",
+      "floor_level": "Floor 1",
+      "zone_type": "CHEMICAL_STORAGE",
+      "max_occupancy": 20,
+      "current_occupancy": 8,
+      "is_evacuation_route": true,
+      "hazard_status": "CLEAR",
+      "created_at": "2026-10-28T18:00:00Z"
+    },
+    "3": {
+      "id": 3,
+      "plant_id": 1,
+      "name": "High-Voltage Transformer Yard",
+      "code": "YARD-HV",
+      "floor_level": "Ground Exterior",
+      "zone_type": "HIGH_VOLTAGE",
+      "max_occupancy": 10,
+      "current_occupancy": 3,
+      "is_evacuation_route": true,
+      "hazard_status": "CLEAR",
+      "created_at": "2026-10-28T18:00:00Z"
+    },
+    "4": {
+      "id": 4,
+      "plant_id": 1,
+      "name": "Automated Robotic Assembly Bay",
+      "code": "BAY-ROBOT",
+      "floor_level": "Floor 1",
+      "zone_type": "ASSEMBLY",
+      "max_occupancy": 35,
+      "current_occupancy": 18,
+      "is_evacuation_route": true,
+      "hazard_status": "CLEAR",
+      "created_at": "2026-10-28T18:00:00Z"
+    },
+    "5": {
+      "id": 5,
+      "plant_id": 1,
+      "name": "Finished Goods Logistics Hub",
+      "code": "WH-LOGISTICS",
+      "floor_level": "Floor 1",
+      "zone_type": "WAREHOUSE",
+      "max_occupancy": 30,
+      "current_occupancy": 14,
+      "is_evacuation_route": true,
+      "hazard_status": "CLEAR",
+      "created_at": "2026-10-28T18:00:00Z"
+    },
+    "6": {
+      "id": 6,
+      "plant_id": 1,
+      "name": "Central Industrial Control Room",
+      "code": "CCR-01",
+      "floor_level": "Mezzanine Level",
+      "zone_type": "CONTROL_ROOM",
+      "max_occupancy": 15,
+      "current_occupancy": 6,
+      "is_evacuation_route": true,
+      "hazard_status": "CLEAR",
+      "created_at": "2026-10-28T18:00:00Z"
+    }
+  },
+
+  "devices": {
+    "DEV-ENV-01": {
+      "device_id": "DEV-ENV-01",
+      "plant_id": 1,
+      "zone_id": 1,
+      "name": "Milling Hall Temp & Humidity Station",
+      "device_type": "ENVIRONMENTAL_STATION",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -62,
+      "battery_percentage": 98,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.112",
+      "mac_address": "AA:BB:CC:DD:EE:01",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-VIB-01": {
+      "device_id": "DEV-VIB-01",
+      "plant_id": 1,
+      "zone_id": 1,
+      "name": "CNC Milling Spindle Vibration Node",
+      "device_type": "VIBRATION_SENSOR",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -68,
+      "battery_percentage": 92,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.113",
+      "mac_address": "AA:BB:CC:DD:EE:02",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-GAS-01": {
+      "device_id": "DEV-GAS-01",
+      "plant_id": 1,
+      "zone_id": 2,
+      "name": "Reactor Bay Combustible Gas Sniffer MQ-2",
+      "device_type": "GAS_DETECTOR",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -58,
+      "battery_percentage": 95,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.114",
+      "mac_address": "AA:BB:CC:DD:EE:03",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-SMK-01": {
+      "device_id": "DEV-SMK-01",
+      "plant_id": 1,
+      "zone_id": 2,
+      "name": "Chemical Solvent Smoke & Aerosol Detector",
+      "device_type": "ENVIRONMENTAL_STATION",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -60,
+      "battery_percentage": 94,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.115",
+      "mac_address": "AA:BB:CC:DD:EE:04",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-SOS-01": {
+      "device_id": "DEV-SOS-01",
+      "plant_id": 1,
+      "zone_id": 2,
+      "name": "Solvent Bay Physical E-Stop & SOS Pillar",
+      "device_type": "PHYSICAL_SOS",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -54,
+      "battery_percentage": 100,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.116",
+      "mac_address": "AA:BB:CC:DD:EE:05",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-THM-01": {
+      "device_id": "DEV-THM-01",
+      "plant_id": 1,
+      "zone_id": 3,
+      "name": "HV Transformer Thermal Infrared Pod",
+      "device_type": "ENVIRONMENTAL_STATION",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -71,
+      "battery_percentage": 88,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.117",
+      "mac_address": "AA:BB:CC:DD:EE:06",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-VIB-02": {
+      "device_id": "DEV-VIB-02",
+      "plant_id": 1,
+      "zone_id": 4,
+      "name": "Robotic Arm KUKA Harmonic Vibration Probe",
+      "device_type": "VIBRATION_SENSOR",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -65,
+      "battery_percentage": 91,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.118",
+      "mac_address": "AA:BB:CC:DD:EE:07",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-GW-01": {
+      "device_id": "DEV-GW-01",
+      "plant_id": 1,
+      "zone_id": 6,
+      "name": "Primary Edge LoRaWAN & MQTT Industrial Gateway",
+      "device_type": "EDGE_GATEWAY",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -48,
+      "battery_percentage": 100,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "10.0.1.15",
+      "mac_address": "AA:BB:CC:DD:EE:08",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-CAM-01": {
+      "device_id": "DEV-CAM-01",
+      "plant_id": 1,
+      "zone_id": 2,
+      "name": "Explosion-Proof Dome Camera Cam-01",
+      "device_type": "CCTV_CAMERA",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -52,
+      "battery_percentage": 100,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.120",
+      "mac_address": "AA:BB:CC:DD:EE:09",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-CAM-02": {
+      "device_id": "DEV-CAM-02",
+      "plant_id": 1,
+      "zone_id": 3,
+      "name": "Restricted Yard Perimeter Camera Cam-02",
+      "device_type": "CCTV_CAMERA",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -55,
+      "battery_percentage": 100,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.121",
+      "mac_address": "AA:BB:CC:DD:EE:0A",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-ENV-02": {
+      "device_id": "DEV-ENV-02",
+      "plant_id": 1,
+      "zone_id": 5,
+      "name": "Warehouse Ambient Air Quality Monitor",
+      "device_type": "ENVIRONMENTAL_STATION",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -64,
+      "battery_percentage": 89,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.122",
+      "mac_address": "AA:BB:CC:DD:EE:0B",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    },
+    "DEV-SOS-02": {
+      "device_id": "DEV-SOS-02",
+      "plant_id": 1,
+      "zone_id": 1,
+      "name": "Machining Hall Exit SOS Emergency Station",
+      "device_type": "PHYSICAL_SOS",
+      "connection_status": "ONLINE",
+      "signal_strength_dbm": -59,
+      "battery_percentage": 100,
+      "firmware_version": "v2.4.1-rc3",
+      "ip_address": "192.168.1.123",
+      "mac_address": "AA:BB:CC:DD:EE:0C",
+      "last_seen_at": "2026-10-28T18:10:00Z",
+      "calibration_date": "2026-10-01T00:00:00Z",
+      "is_simulated": true
+    }
+  },
+
+  "live_telemetry": {
+    "DEV-ENV-01": {
+      "device_id": "DEV-ENV-01",
+      "zone_id": 1,
+      "plant_id": 1,
+      "metric_name": "temperature",
+      "metric_value": 24.3,
+      "unit": "degC",
+      "min_threshold": 15.0,
+      "max_threshold": 42.0,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    },
+    "DEV-VIB-01": {
+      "device_id": "DEV-VIB-01",
+      "zone_id": 1,
+      "plant_id": 1,
+      "metric_name": "vibration_rms",
+      "metric_value": 1.7,
+      "unit": "mm/s",
+      "min_threshold": 0.2,
+      "max_threshold": 4.5,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    },
+    "DEV-GAS-01": {
+      "device_id": "DEV-GAS-01",
+      "zone_id": 2,
+      "plant_id": 1,
+      "metric_name": "combustible_gas",
+      "metric_value": 13.4,
+      "unit": "ppm",
+      "min_threshold": 0.0,
+      "max_threshold": 50.0,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    },
+    "DEV-SMK-01": {
+      "device_id": "DEV-SMK-01",
+      "zone_id": 2,
+      "plant_id": 1,
+      "metric_name": "smoke_ppm",
+      "metric_value": 3.8,
+      "unit": "ppm",
+      "min_threshold": 0.0,
+      "max_threshold": 20.0,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    },
+    "DEV-THM-01": {
+      "device_id": "DEV-THM-01",
+      "zone_id": 3,
+      "plant_id": 1,
+      "metric_name": "temperature",
+      "metric_value": 38.1,
+      "unit": "degC",
+      "min_threshold": 15.0,
+      "max_threshold": 42.0,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    },
+    "DEV-VIB-02": {
+      "device_id": "DEV-VIB-02",
+      "zone_id": 4,
+      "plant_id": 1,
+      "metric_name": "vibration_rms",
+      "metric_value": 1.4,
+      "unit": "mm/s",
+      "min_threshold": 0.2,
+      "max_threshold": 4.5,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    },
+    "DEV-ENV-02": {
+      "device_id": "DEV-ENV-02",
+      "zone_id": 5,
+      "plant_id": 1,
+      "metric_name": "temperature",
+      "metric_value": 22.6,
+      "unit": "degC",
+      "min_threshold": 15.0,
+      "max_threshold": 42.0,
+      "status": "NORMAL",
+      "quality_score": 0.99,
+      "is_simulated": true,
+      "timestamp": "2026-10-28T18:10:00Z"
+    }
+  },
+
+  "incidents": {
+    "INC-20261028-0001": {
+      "id": 1,
+      "incident_number": "INC-20261028-0001",
+      "plant_id": 1,
+      "zone_id": 2,
+      "device_id": "DEV-GAS-01",
+      "category": "HAZARDOUS_GAS",
+      "severity": "HIGH",
+      "detection_method": "AUTOMATED_RULE",
+      "title": "Volatile Organic Solvent Leak Detected (MQ-2)",
+      "description": "Sensor DEV-GAS-01 registered 78.4 ppm isobutane/solvent vapors exceeding 50.0 ppm safe limit.",
+      "status": "ACKNOWLEDGED",
+      "assigned_team": "Hazardous Materials Containment Crew",
+      "assigned_operator_id": 3,
+      "created_at": "2026-10-28T16:22:00Z",
+      "acknowledged_at": "2026-10-28T16:28:00Z",
+      "responding_at": null,
+      "contained_at": null,
+      "resolved_at": null,
+      "resolution_notes": null,
+      "is_simulated": true
+    }
+  },
+
+  "notifications": {
+    "notif_1": {
+      "id": 1,
+      "incident_id": 1,
+      "alert_level": "WARNING",
+      "channel": "DASHBOARD",
+      "recipient_group": "CONTROL_ROOM",
+      "recipient_user_id": null,
+      "title": "[HIGH] Volatile Organic Solvent Leak Detected - Main Console",
+      "message": "Incident #INC-20261028-0001 in Zone 2: Elevated hydrocarbon levels detected.",
+      "delivery_status": "ACKNOWLEDGED",
+      "escalation_level": 1,
+      "retry_count": 0,
+      "last_attempt_at": "2026-10-28T16:22:00Z",
+      "acknowledged_at": "2026-10-28T16:28:00Z",
+      "failure_reason": null,
+      "created_at": "2026-10-28T16:22:00Z"
+    }
+  },
+
+  "workers": {
+    "W-2026-001": {
+      "id": 1,
+      "badge_number": "W-2026-001",
+      "user_id": 7,
+      "full_name": "Alex Morgan",
+      "department": "Production Line Operations",
+      "emergency_contact": "+1-313-555-0191",
+      "certification_level": "Certified HazMat Level 2",
+      "current_zone_id": 1,
+      "is_on_site": true,
+      "last_checkin_at": "2026-10-28T07:05:00Z",
+      "evacuated": false,
+      "heart_rate": 74,
+      "body_temp": 36.7
+    },
+    "W-2026-002": {
+      "id": 2,
+      "badge_number": "W-2026-002",
+      "user_id": null,
+      "full_name": "James Kowalski",
+      "department": "Chemical Processing",
+      "emergency_contact": "+1-713-555-0182",
+      "certification_level": "Certified HazMat Level 3",
+      "current_zone_id": 2,
+      "is_on_site": true,
+      "last_checkin_at": "2026-10-28T07:15:00Z",
+      "evacuated": false,
+      "heart_rate": 72,
+      "body_temp": 36.5
+    },
+    "W-2026-003": {
+      "id": 3,
+      "badge_number": "W-2026-003",
+      "user_id": null,
+      "full_name": "Maria Santos",
+      "department": "Robotics & Assembly",
+      "emergency_contact": "+1-313-555-0173",
+      "certification_level": "Certified HazMat Level 1",
+      "current_zone_id": 4,
+      "is_on_site": true,
+      "last_checkin_at": "2026-10-28T06:58:00Z",
+      "evacuated": false,
+      "heart_rate": 78,
+      "body_temp": 36.9
+    }
+  },
+
+  "equipment": {
+    "EQ-CNC-001": {
+      "equipment_id": "EQ-CNC-001",
+      "plant_id": 1,
+      "zone_id": 1,
+      "name": "5-Axis High-Torque CNC Machining Center",
+      "category": "CNC_MACHINE",
+      "status": "OPERATIONAL",
+      "health_score": 96.2,
+      "vibration_health": 95.0,
+      "thermal_health": 97.4,
+      "hours_operated": 3840.0,
+      "last_service_date": "2026-09-01T00:00:00Z",
+      "next_service_date": "2026-12-01T00:00:00Z",
+      "mtbf_hours": 720.0,
+      "mttr_hours": 2.5,
+      "estimated_rul_days": 92
+    },
+    "EQ-BOIL-200": {
+      "equipment_id": "EQ-BOIL-200",
+      "plant_id": 1,
+      "zone_id": 2,
+      "name": "Industrial High-Pressure Steam Boiler 200 PSI",
+      "category": "BOILER",
+      "status": "OPERATIONAL",
+      "health_score": 91.8,
+      "vibration_health": 93.5,
+      "thermal_health": 90.1,
+      "hours_operated": 5120.0,
+      "last_service_date": "2026-07-15T00:00:00Z",
+      "next_service_date": "2026-11-15T00:00:00Z",
+      "mtbf_hours": 600.0,
+      "mttr_hours": 4.0,
+      "estimated_rul_days": 74
+    },
+    "EQ-COMP-04": {
+      "equipment_id": "EQ-COMP-04",
+      "plant_id": 1,
+      "zone_id": 1,
+      "name": "Atlas Copco Rotary Screw Compressor 75kW",
+      "category": "COMPRESSOR",
+      "status": "OPERATIONAL",
+      "health_score": 88.4,
+      "vibration_health": 85.0,
+      "thermal_health": 91.8,
+      "hours_operated": 6400.0,
+      "last_service_date": "2026-06-01T00:00:00Z",
+      "next_service_date": "2026-10-30T00:00:00Z",
+      "mtbf_hours": 450.0,
+      "mttr_hours": 3.2,
+      "estimated_rul_days": 58
+    },
+    "EQ-PUMP-101": {
+      "equipment_id": "EQ-PUMP-101",
+      "plant_id": 1,
+      "zone_id": 2,
+      "name": "Centrifugal Solvent Transfer Feed Pump",
+      "category": "PUMP",
+      "status": "DEGRADED",
+      "health_score": 68.2,
+      "vibration_health": 61.0,
+      "thermal_health": 75.4,
+      "hours_operated": 7820.0,
+      "last_service_date": "2026-04-10T00:00:00Z",
+      "next_service_date": "2026-10-29T00:00:00Z",
+      "mtbf_hours": 320.0,
+      "mttr_hours": 5.0,
+      "estimated_rul_days": 24
+    },
+    "EQ-XFRM-01": {
+      "equipment_id": "EQ-XFRM-01",
+      "plant_id": 1,
+      "zone_id": 3,
+      "name": "Square D 33kV Step-Down Substation Transformer",
+      "category": "TRANSFORMER",
+      "status": "OPERATIONAL",
+      "health_score": 97.5,
+      "vibration_health": 98.0,
+      "thermal_health": 97.0,
+      "hours_operated": 12000.0,
+      "last_service_date": "2026-01-10T00:00:00Z",
+      "next_service_date": "2027-01-10T00:00:00Z",
+      "mtbf_hours": 2500.0,
+      "mttr_hours": 8.0,
+      "estimated_rul_days": 160
+    },
+    "EQ-ROBOT-01": {
+      "equipment_id": "EQ-ROBOT-01",
+      "plant_id": 1,
+      "zone_id": 4,
+      "name": "KUKA KR-210 Heavy Industrial Articulated Robot",
+      "category": "ASSEMBLY",
+      "status": "OPERATIONAL",
+      "health_score": 94.0,
+      "vibration_health": 93.2,
+      "thermal_health": 94.8,
+      "hours_operated": 2900.0,
+      "last_service_date": "2026-08-20T00:00:00Z",
+      "next_service_date": "2027-02-20T00:00:00Z",
+      "mtbf_hours": 850.0,
+      "mttr_hours": 1.8,
+      "estimated_rul_days": 110
+    }
+  },
+
+  "work_orders": {
+    "WO-2026-0891": {
+      "work_order_number": "WO-2026-0891",
+      "equipment_id": "EQ-PUMP-101",
+      "incident_id": null,
+      "title": "Vibration Anomaly & Impeller Bearing Inspection",
+      "description": "Predictive maintenance model flagged harmonic deviation exceeding ISO 10816 Level C thresholds.",
+      "priority": "HIGH",
+      "status": "IN_PROGRESS",
+      "assigned_to_user_id": 6,
+      "created_at": "2026-10-27T09:00:00Z",
+      "scheduled_date": "2026-10-28T08:00:00Z",
+      "completed_at": null,
+      "technician_notes": null
+    },
+    "WO-2026-0892": {
+      "work_order_number": "WO-2026-0892",
+      "equipment_id": "EQ-BOIL-200",
+      "incident_id": null,
+      "title": "Quarterly Relief Valve Pressure & Seal Certification",
+      "description": "Mandatory ASME safety valve integrity check and hydrostatic leak test.",
+      "priority": "MEDIUM",
+      "status": "OPEN",
+      "assigned_to_user_id": 6,
+      "created_at": "2026-10-27T09:00:00Z",
+      "scheduled_date": "2026-10-30T08:00:00Z",
+      "completed_at": null,
+      "technician_notes": null
+    }
+  },
+
+  "gateway_health": {
+    "DEV-GW-01": {
+      "gateway_id": "DEV-GW-01",
+      "plant_id": 1,
+      "name": "Primary Edge LoRaWAN & MQTT Industrial Gateway",
+      "ip_address": "10.0.1.15",
+      "status": "HEALTHY",
+      "broker_connected": true,
+      "ping_latency_ms": 3.8,
+      "packet_loss_percent": 0.0,
+      "buffered_events_count": 0,
+      "last_heartbeat_at": "2026-10-28T18:10:00Z"
+    }
+  },
+
+  "ai_models": {
+    "model_1": {
+      "id": 1,
+      "model_name": "Multi-Sensor Spatial Anomaly Detector",
+      "model_type": "ISOLATION_FOREST",
+      "version": "v1.2.4-rf-iso",
+      "status": "ACTIVE",
+      "precision": 0.965,
+      "recall": 0.942,
+      "f1_score": 0.953,
+      "false_positive_rate": 0.028,
+      "latency_ms": 11.4,
+      "last_trained_at": "2026-10-01T00:00:00Z",
+      "trained_sample_count": 185000
+    },
+    "model_2": {
+      "id": 2,
+      "model_name": "Rotating Machinery Remaining Useful Life Regressor",
+      "model_type": "RUL_REGRESSOR",
+      "version": "v2.1.0-gbm",
+      "status": "ACTIVE",
+      "precision": 0.938,
+      "recall": 0.915,
+      "f1_score": 0.926,
+      "false_positive_rate": 0.045,
+      "latency_ms": 18.6,
+      "last_trained_at": "2026-10-01T00:00:00Z",
+      "trained_sample_count": 94000
+    }
+  },
+
+  "ai_anomalies": {
+    "anomaly_1": {
+      "id": 1,
+      "device_id": "EQ-PUMP-101",
+      "zone_id": 2,
+      "timestamp": "2026-10-28T14:30:00Z",
+      "anomaly_score": 0.82,
+      "risk_index": 74.5,
+      "model_version": "v1.2.4-rf-iso",
+      "inputs_summary": "{\"vibration_rms\": 3.9, \"temperature\": 51.2, \"combustible_gas\": 14.1}",
+      "reason_codes": "[\"VIBRATION_HARMONIC_DEVIATION\", \"THERMAL_GRADIENT_SPIKE\"]",
+      "confidence": 0.94,
+      "human_review_status": "PENDING"
+    }
+  },
+
+  "camera_events": {
+    "evt_cam_001": {
+      "id": 1,
+      "camera_id": "DEV-CAM-02",
+      "camera_name": "Restricted Yard Perimeter Camera Cam-02",
+      "zone_id": 3,
+      "event_type": "RESTRICTED_ZONE_ENTRY",
+      "confidence": 0.94,
+      "timestamp": "2026-10-28T11:45:00Z",
+      "frame_snapshot_url": "https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=600",
+      "human_verification_status": "PENDING",
+      "reviewed_by_user_id": null,
+      "review_notes": null
+    },
+    "evt_cam_002": {
+      "id": 2,
+      "camera_id": "DEV-CAM-01",
+      "camera_name": "Explosion-Proof Dome Camera Cam-01",
+      "zone_id": 2,
+      "event_type": "MISSING_PPE",
+      "confidence": 0.88,
+      "timestamp": "2026-10-28T10:15:00Z",
+      "frame_snapshot_url": "https://images.unsplash.com/photo-1504917599217-d4dc5ebe6122?w=600",
+      "human_verification_status": "VERIFIED",
+      "reviewed_by_user_id": 4,
+      "review_notes": "Worker entered without mandatory Level 2 chemical respirator goggles. Verbal warning issued."
+    }
+  },
+
+  "evacuation_plans": {
+    "zone_1": {
+      "id": 1, "plant_id": 1, "zone_id": 1,
+      "primary_route_name": "Primary Route Corridor E-1 to North Lawn",
+      "secondary_route_name": "Secondary Fire Stairwell S-1 to South Gate",
+      "assembly_point_name": "Muster Point Alpha (North Parking)",
+      "exit_door_id": "EXIT-DOOR-01",
+      "is_blocked": false, "blocked_reason": null,
+      "last_drill_date": "2026-09-15T09:00:00Z"
+    },
+    "zone_2": {
+      "id": 2, "plant_id": 1, "zone_id": 2,
+      "primary_route_name": "Primary Route Corridor E-2 to North Lawn",
+      "secondary_route_name": "Secondary Fire Stairwell S-2 to South Gate",
+      "assembly_point_name": "Muster Point Alpha (North Parking)",
+      "exit_door_id": "EXIT-DOOR-02",
+      "is_blocked": false, "blocked_reason": null,
+      "last_drill_date": "2026-09-15T09:00:00Z"
+    },
+    "zone_3": {
+      "id": 3, "plant_id": 1, "zone_id": 3,
+      "primary_route_name": "Primary Route Corridor E-3 to North Lawn",
+      "secondary_route_name": "Secondary Fire Stairwell S-3 to South Gate",
+      "assembly_point_name": "Muster Point Alpha (North Parking)",
+      "exit_door_id": "EXIT-DOOR-03",
+      "is_blocked": false, "blocked_reason": null,
+      "last_drill_date": "2026-09-15T09:00:00Z"
+    },
+    "zone_4": {
+      "id": 4, "plant_id": 1, "zone_id": 4,
+      "primary_route_name": "Primary Route Corridor E-4 to North Lawn",
+      "secondary_route_name": "Secondary Fire Stairwell S-4 to South Gate",
+      "assembly_point_name": "Muster Point Alpha (North Parking)",
+      "exit_door_id": "EXIT-DOOR-04",
+      "is_blocked": false, "blocked_reason": null,
+      "last_drill_date": "2026-09-15T09:00:00Z"
+    },
+    "zone_5": {
+      "id": 5, "plant_id": 1, "zone_id": 5,
+      "primary_route_name": "Primary Route Corridor E-5 to North Lawn",
+      "secondary_route_name": "Secondary Fire Stairwell S-5 to South Gate",
+      "assembly_point_name": "Muster Point Alpha (North Parking)",
+      "exit_door_id": "EXIT-DOOR-05",
+      "is_blocked": false, "blocked_reason": null,
+      "last_drill_date": "2026-09-15T09:00:00Z"
+    },
+    "zone_6": {
+      "id": 6, "plant_id": 1, "zone_id": 6,
+      "primary_route_name": "Primary Route Corridor E-6 to North Lawn",
+      "secondary_route_name": "Secondary Fire Stairwell S-6 to South Gate",
+      "assembly_point_name": "Muster Point Alpha (North Parking)",
+      "exit_door_id": "EXIT-DOOR-06",
+      "is_blocked": false, "blocked_reason": null,
+      "last_drill_date": "2026-09-15T09:00:00Z"
+    }
+  },
+
+  "audit_logs": {
+    "log_1": {
+      "id": 1,
+      "user_id": 1,
+      "username": "superadmin",
+      "action": "SYSTEM_INITIALIZE",
+      "entity_type": "SYSTEM",
+      "entity_id": "ROOT",
+      "details": "Smart Industry 360 platform initialized with ISO 45001 safety baseline.",
+      "ip_address": "127.0.0.1",
+      "timestamp": "2026-10-28T18:00:00Z"
+    },
+    "log_2": {
+      "id": 2,
+      "user_id": 3,
+      "username": "operator",
+      "action": "ACKNOWLEDGE_ALERT",
+      "entity_type": "INCIDENT",
+      "entity_id": "1",
+      "details": "Incident INC-20261028-0001 acknowledged by Control Room Operator Elena Rostova.",
+      "ip_address": "192.168.1.5",
+      "timestamp": "2026-10-28T16:28:00Z"
+    }
+  },
+
+  "system_settings": {
+    "SIMULATION_ENABLED": {
+      "key": "SIMULATION_ENABLED",
+      "value": "true",
+      "description": "Enable or disable the background telemetry simulation engine.",
+      "updated_at": "2026-10-28T18:00:00Z"
+    },
+    "ALERT_ESCALATION_TIMEOUT_SECONDS": {
+      "key": "ALERT_ESCALATION_TIMEOUT_SECONDS",
+      "value": "45",
+      "description": "Seconds before an unacknowledged NEW incident auto-escalates to Supervisor level.",
+      "updated_at": "2026-10-28T18:00:00Z"
+    },
+    "TELEMETRY_INTERVAL_SECONDS": {
+      "key": "TELEMETRY_INTERVAL_SECONDS",
+      "value": "3.0",
+      "description": "Simulation loop sleep interval in seconds between telemetry ticks.",
+      "updated_at": "2026-10-28T18:00:00Z"
+    },
+    "AI_ANOMALY_THRESHOLD": {
+      "key": "AI_ANOMALY_THRESHOLD",
+      "value": "0.65",
+      "description": "Anomaly score threshold above which AI engine triggers an incident.",
+      "updated_at": "2026-10-28T18:00:00Z"
+    },
+    "MQTT_BROKER_HOST": {
+      "key": "MQTT_BROKER_HOST",
+      "value": "localhost",
+      "description": "MQTT broker hostname for edge gateway connection.",
+      "updated_at": "2026-10-28T18:00:00Z"
+    },
+    "MAX_ZONE_OCCUPANCY_ALERTS": {
+      "key": "MAX_ZONE_OCCUPANCY_ALERTS",
+      "value": "true",
+      "description": "Trigger alerts when zone current_occupancy exceeds max_occupancy.",
+      "updated_at": "2026-10-28T18:00:00Z"
+    }
+  }
+}

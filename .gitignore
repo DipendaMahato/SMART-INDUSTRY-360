@@ -1,0 +1,29 @@
+node_modules/
+dist/
+build/
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# Databases & local runtimes
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment and secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*serviceAccountKey*.json
+*firebase-adminsdk*.json
+
+# Logs & temp
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+

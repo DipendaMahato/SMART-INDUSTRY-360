@@ -1,0 +1,46 @@
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0
+    container_name: smart-industry-mqtt
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mosquitto/log
+
+  backend:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.backend
+    container_name: smart-industry-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./smart_industry.db
+      - MQTT_BROKER_HOST=mqtt-broker
+      - MQTT_BROKER_PORT=1883
+      - SIMULATION_ENABLED=true
+      - SECRET_KEY=smart-industry-360-enterprise-sec-token-998877665544
+    volumes:
+      - backend-data:/app
+    depends_on:
+      - mqtt-broker
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.frontend
+    container_name: smart-industry-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mosquitto-data:
+  mosquitto-log:
+  backend-data:
