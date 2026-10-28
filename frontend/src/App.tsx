@@ -13,9 +13,6 @@ import { api } from './services/api';
 // Public Pages
 import { HomePage } from './pages/public/HomePage';
 import { FeaturesPage } from './pages/public/FeaturesPage';
-import { ArchitecturePage } from './pages/public/ArchitecturePage';
-import { AboutPage } from './pages/public/AboutPage';
-import { ContactPage } from './pages/public/ContactPage';
 import { LoginPage } from './pages/public/LoginPage';
 
 // Worker Mobile Portal
@@ -148,10 +145,6 @@ export const App: React.FC = () => {
             <Route element={<PublicLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/features" element={<FeaturesPage />} />
-              <Route path="/architecture" element={<ArchitecturePage />} />
-              <Route path="/docs" element={<ArchitecturePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
               <Route path="/login" element={<LoginPage />} />
             </Route>
 

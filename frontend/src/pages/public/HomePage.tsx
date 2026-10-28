@@ -4,7 +4,6 @@ import {
   Cpu,
   Radio,
   ArrowRight,
-  Terminal,
   Lock,
 } from 'lucide-react';
 
@@ -44,14 +43,6 @@ export const HomePage: React.FC = () => {
             >
               <Radio className="w-4 h-4 text-rose-400" />
               <span>Mobile Worker Portal & SOS</span>
-            </Link>
-
-            <Link
-              to="/docs"
-              className="px-6 py-3.5 rounded-xl text-sm font-bold bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-2 transition-all"
-            >
-              <Terminal className="w-4 h-4" />
-              <span>Architecture & Documentation</span>
             </Link>
           </div>
 
