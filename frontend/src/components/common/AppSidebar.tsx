@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Activity,
-  Layers,
   Wrench,
   FileBarChart,
   ChevronLeft,
@@ -24,7 +23,6 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ criticalCount = 0, alert
       items: [
         { label: 'Overview Dashboard',    path: '/app/overview',          icon: LayoutDashboard },
         { label: 'Live Monitoring',       path: '/app/monitoring',        icon: Activity },
-        { label: 'Factory Digital Twin',  path: '/app/digital-twin',      icon: Layers },
       ],
     },
     {

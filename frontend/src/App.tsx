@@ -21,7 +21,6 @@ import { WorkerPortalPage } from './pages/worker/WorkerPortalPage';
 // Command Center Pages (All 18 Modules)
 import { OverviewDashboardPage } from './pages/app/OverviewDashboardPage';
 import { LiveMonitoringPage } from './pages/app/LiveMonitoringPage';
-import { DigitalTwinPage } from './pages/app/DigitalTwinPage';
 import { EquipmentPage } from './pages/app/EquipmentPage';
 import { ReportsPage } from './pages/app/ReportsPage';
 
@@ -151,12 +150,11 @@ export const App: React.FC = () => {
             {/* Mobile Worker Portal */}
             <Route path="/worker" element={<WorkerPortalPage />} />
 
-            {/* Command Center Routes (All 18 Modules) */}
+            {/* Command Center Routes */}
             <Route path="/app" element={<AppLayout />}>
               <Route index element={<Navigate to="/app/overview" replace />} />
               <Route path="overview" element={<PlantRoute component={OverviewDashboardPage} />} />
               <Route path="monitoring" element={<PlantRoute component={LiveMonitoringPage} />} />
-              <Route path="digital-twin" element={<PlantRoute component={DigitalTwinPage} />} />
               <Route path="equipment" element={<PlantRoute component={EquipmentPage} />} />
               <Route path="reports" element={<PlantRoute component={ReportsPage} />} />
               <Route path="*" element={<Navigate to="/app/overview" replace />} />

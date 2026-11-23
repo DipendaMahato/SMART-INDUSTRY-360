@@ -375,13 +375,13 @@ export const OverviewDashboardPage: React.FC<{ plantId: number }> = ({ plantId }
             )}
           </div>
 
-          {/* Digital Twin CTA */}
+          {/* Live Monitoring CTA */}
           <Link
-            to="/app/digital-twin"
+            to="/app/monitoring"
             className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 hover:text-blue-300 border border-blue-500/20 hover:border-blue-500/40 text-xs font-semibold transition-all"
           >
-            <Layers className="w-3.5 h-3.5" />
-            Open Factory Digital Twin
+            <Activity className="w-3.5 h-3.5" />
+            Open Live Sensor Monitoring
           </Link>
         </div>
 

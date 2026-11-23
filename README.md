@@ -75,12 +75,10 @@ flowchart TD
 
     subgraph TIER5["Tier 5: Command Center & User Portals"]
         DASH["Industrial Control Room Web App\n(React 19 + TypeScript + Vite)"]
-        TWIN["Interactive 2D Factory Digital Twin\n(Live Zone Risk Fills)"]
         WORKER["Frontline Worker Mobile Portal\n(1-Tap SOS Distress)"]
         CCTV["CCTV & Computer Vision Review"]
 
         WS_MGR -- "Instant Live Pushes" --> DASH
-        WS_MGR --> TWIN
         WS_MGR --> WORKER
         API --> CCTV
     end
@@ -260,28 +258,22 @@ The platform automatically provisions 8 standard industrial roles. Use these acc
 
 ## 🎛️ 6. Core Modules & Capabilities
 
-### 1. 🏭 Factory Digital Twin (`/app/digital-twin`)
-Interactive 2D schematic floor plan of the manufacturing plant. Zones dynamically change colors based on real-time sensor metrics:
-- 🟢 **CLEAR**: Safe baseline parameters.
-- 🟡 **WARNING**: Parameter drifting above threshold.
-- 🔴 **EVACUATE**: Hazardous gas leak, extreme heat, or emergency SOS active.
-
-### 2. 🚨 Emergency Center & Escalation Engine (`/app/emergency`)
+### 1. 🚨 Emergency Center & Escalation Engine (`/app/emergency`)
 Enforces a 5-stage formal incident state machine:
 $$\text{NEW} \longrightarrow \text{ACKNOWLEDGED} \longrightarrow \text{RESPONDING} \longrightarrow \text{CONTAINED} \longrightarrow \text{RESOLVED}$$
 - **45-Second SLA Timer**: If an operator does not acknowledge a critical alert within 45 seconds, the system automatically escalates notifications to safety directors and facility managers.
 
-### 3. 🧠 AI Anomaly Intelligence (`/app/ai-intelligence`)
+### 2. 🧠 AI Anomaly Intelligence (`/app/ai-intelligence`)
 - Powered by an **Isolation Forest** unsupervised learning model.
 - Analyzes multi-dimensional sensor vectors (Temperature, Humidity, Gas PPM, RMS Vibration, Spike Counts) to identify anomalies before physical failures happen.
 - Includes an **Explainability Reason Code** (e.g., `THERMAL_AEROSOL_CONCOMITANT_SIGNATURE`).
 
-### 4. 📹 CCTV & Security Verification (`/app/cctv`)
+### 3. 📹 CCTV & Security Verification (`/app/cctv`)
 - Monitors RTSP camera feeds across high-risk zones.
 - Captures automated AI computer-vision flags (PPE violations, unauthorized zone entry, smoke visual signatures).
 - Includes a mandatory human verification protocol (`CONFIRM` / `DISMISS`).
 
-### 5. 📱 Frontline Worker Mobile Portal (`/worker`)
+### 4. 📱 Frontline Worker Mobile Portal (`/worker`)
 - High-contrast, mobile-friendly interface designed for rugged handhelds or smartphones.
 - **1-Tap Emergency SOS Distress Button** with a 5-second accidental press cancellation countdown.
 - Real-time evacuation broadcast notifications with designated safe muster points.
