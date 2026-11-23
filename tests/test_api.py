@@ -116,6 +116,10 @@ def test_incident_lifecycle():
     assert resolve_res.status_code == 200
     assert resolve_res.json()["status"] == "RESOLVED"
 
+    # 6. Cleanup test incident to keep database clean
+    del_res = client.delete(f"/api/v1/incidents/{inc_id}", headers=headers)
+    assert del_res.status_code == 200
+
 def test_ai_anomaly_engine_evaluation():
     # Normal metrics
     is_anomaly, score, risk, reasons = ai_engine.evaluate_telemetry_vector({

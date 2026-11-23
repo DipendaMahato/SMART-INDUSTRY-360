@@ -16,6 +16,7 @@ import {
   Flame,
   Zap,
   Info,
+  Trash2,
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { StatusBadge } from '../../components/common/StatusBadge';
@@ -28,6 +29,34 @@ export const ReportsPage: React.FC<{ plantId: number }> = ({ plantId }) => {
   const [refreshing, setRefreshing] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [severityFilter, setSeverityFilter] = useState('ALL');
+  const [deletingId, setDeletingId] = useState<number | null>(null);
+  const [clearing, setClearing] = useState(false);
+
+  const handleDeleteIncident = async (id: number, incNumber: string) => {
+    if (!window.confirm(`Are you sure you want to permanently delete incident ${incNumber}?`)) return;
+    setDeletingId(id);
+    try {
+      await api.deleteIncident(id);
+      await fetchData(true);
+    } catch (err: any) {
+      alert(err.message || 'Failed to delete incident');
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  const handleClearAll = async () => {
+    if (!window.confirm('Are you sure you want to clear all incident records? This will purge historical event logs.')) return;
+    setClearing(true);
+    try {
+      await api.clearAllIncidents(plantId);
+      await fetchData(true);
+    } catch (err: any) {
+      alert(err.message || 'Failed to clear incidents');
+    } finally {
+      setClearing(false);
+    }
+  };
 
   const fetchData = async (isManual = false) => {
     if (isManual) setRefreshing(true);
@@ -358,6 +387,17 @@ export const ReportsPage: React.FC<{ plantId: number }> = ({ plantId }) => {
               <option value="MEDIUM">Medium</option>
               <option value="LOW">Low</option>
             </select>
+
+            {incidents.length > 0 && (
+              <button
+                onClick={handleClearAll}
+                disabled={clearing}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500/20 text-xs font-semibold transition-all disabled:opacity-50"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>{clearing ? 'Clearing...' : 'Clear All Logs'}</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -373,13 +413,22 @@ export const ReportsPage: React.FC<{ plantId: number }> = ({ plantId }) => {
                 <th className="pb-3 font-semibold">Status</th>
                 <th className="pb-3 font-semibold">Created</th>
                 <th className="pb-3 font-semibold">Resolved</th>
+                <th className="pb-3 font-semibold text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60 font-sans">
               {filteredIncidents.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-slate-500">
-                    No incident records matching current query.
+                  <td colSpan={9} className="py-12 text-center">
+                    <ShieldCheck className="w-10 h-10 text-emerald-400/60 mx-auto mb-2" />
+                    <div className="text-sm font-bold text-slate-200">
+                      {incidents.length === 0 ? 'No Incident Records Found' : 'No matching incidents found'}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {incidents.length === 0
+                        ? 'The certified event ledger is completely clear. All plant zones are operating safely without incidents.'
+                        : 'Try adjusting your search query or severity filters.'}
+                    </div>
                   </td>
                 </tr>
               ) : (
@@ -420,6 +469,16 @@ export const ReportsPage: React.FC<{ plantId: number }> = ({ plantId }) => {
                     </td>
                     <td className="py-3 text-slate-400 font-mono text-[11px]">
                       {inc.resolved_at ? new Date(inc.resolved_at).toLocaleString() : 'In Progress'}
+                    </td>
+                    <td className="py-3 text-right">
+                      <button
+                        onClick={() => handleDeleteIncident(inc.id, inc.incident_number)}
+                        disabled={deletingId === inc.id}
+                        title="Delete incident"
+                        className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
                     </td>
                   </tr>
                 ))

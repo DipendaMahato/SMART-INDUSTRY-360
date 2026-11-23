@@ -401,50 +401,9 @@
     }
   },
 
-  "incidents": {
-    "INC-20261028-0001": {
-      "id": 1,
-      "incident_number": "INC-20261028-0001",
-      "plant_id": 1,
-      "zone_id": 2,
-      "device_id": "DEV-GAS-01",
-      "category": "HAZARDOUS_GAS",
-      "severity": "HIGH",
-      "detection_method": "AUTOMATED_RULE",
-      "title": "Volatile Organic Solvent Leak Detected (MQ-2)",
-      "description": "Sensor DEV-GAS-01 registered 78.4 ppm isobutane/solvent vapors exceeding 50.0 ppm safe limit.",
-      "status": "ACKNOWLEDGED",
-      "assigned_team": "Hazardous Materials Containment Crew",
-      "assigned_operator_id": 3,
-      "created_at": "2026-10-28T16:22:00Z",
-      "acknowledged_at": "2026-10-28T16:28:00Z",
-      "responding_at": null,
-      "contained_at": null,
-      "resolved_at": null,
-      "resolution_notes": null,
-      "is_simulated": true
-    }
-  },
+  "incidents": {},
 
-  "notifications": {
-    "notif_1": {
-      "id": 1,
-      "incident_id": 1,
-      "alert_level": "WARNING",
-      "channel": "DASHBOARD",
-      "recipient_group": "CONTROL_ROOM",
-      "recipient_user_id": null,
-      "title": "[HIGH] Volatile Organic Solvent Leak Detected - Main Console",
-      "message": "Incident #INC-20261028-0001 in Zone 2: Elevated hydrocarbon levels detected.",
-      "delivery_status": "ACKNOWLEDGED",
-      "escalation_level": 1,
-      "retry_count": 0,
-      "last_attempt_at": "2026-10-28T16:22:00Z",
-      "acknowledged_at": "2026-10-28T16:28:00Z",
-      "failure_reason": null,
-      "created_at": "2026-10-28T16:22:00Z"
-    }
-  },
+  "notifications": {},
 
   "workers": {
     "W-2026-001": {

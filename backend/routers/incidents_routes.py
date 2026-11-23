@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from backend.database import get_db
-from backend.models import Incident, User, AuditLog, Zone, utcnow
+from backend.models import Incident, User, AuditLog, Zone, Notification, utcnow
 from backend.schemas import IncidentCreate, IncidentUpdate, IncidentOut
 from backend.auth import get_current_user, require_roles
 from backend.notifications_engine import notification_engine
@@ -228,3 +228,69 @@ async def transition_incident_lifecycle(
         "resolution_notes": inc.resolution_notes
     })
     return inc
+
+@router.delete("/clear-all")
+def clear_all_incidents(
+    plant_id: int = Query(default=1),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    inc_ids = [inc.id for inc in db.query(Incident).filter(Incident.plant_id == plant_id).all()]
+    if inc_ids:
+        db.query(Notification).filter(Notification.incident_id.in_(inc_ids)).delete(synchronize_session=False)
+    del_count = db.query(Incident).filter(Incident.plant_id == plant_id).delete(synchronize_session=False)
+
+    db.query(Zone).filter(Zone.plant_id == plant_id).update({"hazard_status": "CLEAR"}, synchronize_session=False)
+
+    audit = AuditLog(
+        user_id=current_user.id,
+        username=current_user.username,
+        action="CLEAR_ALL_INCIDENTS",
+        entity_type="INCIDENT",
+        entity_id="ALL",
+        details=f"Cleared all {del_count} incidents for plant {plant_id}"
+    )
+    db.add(audit)
+    db.commit()
+    try:
+        writeData("incidents", {})
+        writeData("notifications", {})
+    except Exception:
+        pass
+    return {"message": f"Successfully cleared {del_count} incidents"}
+
+@router.delete("/{incident_id}")
+def delete_incident(
+    incident_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    inc = db.query(Incident).filter(Incident.id == incident_id).first()
+    if not inc:
+        raise HTTPException(status_code=404, detail="Incident not found")
+
+    db.query(Notification).filter(Notification.incident_id == incident_id).delete()
+    zone_id = inc.zone_id
+    inc_num = inc.incident_number
+    db.delete(inc)
+
+    active_in_zone = db.query(Incident).filter(
+        Incident.zone_id == zone_id,
+        Incident.status.in_(["NEW", "ACKNOWLEDGED", "RESPONDING"])
+    ).count()
+    if active_in_zone == 0:
+        zone = db.query(Zone).filter(Zone.id == zone_id).first()
+        if zone:
+            zone.hazard_status = "CLEAR"
+
+    audit = AuditLog(
+        user_id=current_user.id,
+        username=current_user.username,
+        action="DELETE_INCIDENT",
+        entity_type="INCIDENT",
+        entity_id=inc_num,
+        details=f"Deleted incident {inc_num}"
+    )
+    db.add(audit)
+    db.commit()
+    return {"message": f"Incident {inc_num} successfully deleted"}

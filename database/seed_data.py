@@ -208,40 +208,7 @@ def seed_database(db: Session):
     db.add(gw)
     db.commit()
 
-    # 11. Initial Incidents & Notifications (for realistic dashboard on first run)
-    inc1 = Incident(
-        incident_number="INC-20261009-0001",
-        plant_id=plant1.id,
-        zone_id=zones[1].id,
-        device_id="DEV-GAS-01",
-        category="HAZARDOUS_GAS",
-        severity="HIGH",
-        detection_method="AUTOMATED_RULE",
-        title="Volatile Organic Solvent Leak Detected (MQ-2)",
-        description="Sensor DEV-GAS-01 registered 78.4 ppm isobutane/solvent vapors exceeding 50.0 ppm safe limit.",
-        status="ACKNOWLEDGED",
-        assigned_team="Hazardous Materials Containment Crew",
-        assigned_operator_id=users[2].id,
-        acknowledged_at=utcnow(),
-        is_simulated=True
-    )
-    db.add(inc1)
-    db.commit()
-    db.refresh(inc1)
-
-    notif1 = Notification(
-        incident_id=inc1.id,
-        alert_level="WARNING",
-        channel="DASHBOARD",
-        recipient_group="CONTROL_ROOM",
-        title="[HIGH] Volatile Organic Solvent Leak Detected - Main Console",
-        message=f"Incident #{inc1.incident_number} in Zone {zones[1].id}: Elevated hydrocarbon levels detected.",
-        delivery_status="ACKNOWLEDGED",
-        escalation_level=1,
-        acknowledged_at=utcnow()
-    )
-    db.add(notif1)
-    db.commit()
+    # 11. Incidents & Notifications (Clean initial state - zero fake incidents)
 
     # 12. Audit Logs
     audit1 = AuditLog(

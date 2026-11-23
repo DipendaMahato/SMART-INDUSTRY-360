@@ -57,6 +57,9 @@ export const api = {
     request<any[]>(`/incidents?plant_id=${plantId}${status ? `&status=${status}` : ''}`),
   getIncident: (id: number) => request<any>(`/incidents/${id}`),
   createIncident: (incident: any) => request<any>('/incidents', { method: 'POST', body: JSON.stringify(incident) }),
+  deleteIncident: (id: number) => request<any>(`/incidents/${id}`, { method: 'DELETE' }),
+  clearAllIncidents: (plantId = 1) =>
+    request<any>(`/incidents/clear-all?plant_id=${plantId}`, { method: 'DELETE' }),
   acknowledgeIncident: (id: number) => request<any>(`/incidents/${id}/acknowledge`, { method: 'POST' }),
   transitionIncident: (id: number, payload: { status?: string; resolution_notes?: string; assigned_team?: string }) =>
     request<any>(`/incidents/${id}/transition`, { method: 'PATCH', body: JSON.stringify(payload) }),
