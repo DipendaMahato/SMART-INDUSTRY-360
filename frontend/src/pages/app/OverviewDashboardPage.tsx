@@ -28,6 +28,7 @@ import {
 } from 'recharts';
 import { Link } from 'react-router-dom';
 import { api } from '../../services/api';
+import { useAuth } from '../../context/AuthContext';
 import { useWebSocket } from '../../context/WebSocketContext';
 import { StatusBadge } from '../../components/common/StatusBadge';
 
@@ -53,6 +54,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export const OverviewDashboardPage: React.FC<{ plantId: number }> = ({ plantId }) => {
+  const { user, role } = useAuth();
   const { subscribe } = useWebSocket();
   const [summary, setSummary] = useState<any>(null);
   const [trendData, setTrendData] = useState<any[]>([]);
@@ -135,6 +137,57 @@ export const OverviewDashboardPage: React.FC<{ plantId: number }> = ({ plantId }
           >
             <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
           </button>
+        </div>
+      </div>
+
+      {/* ── Active Role Session Banner ── */}
+      <div className={`p-4 rounded-2xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-lg transition-all ${
+        role === 'SUPER_ADMIN'
+          ? 'bg-gradient-to-r from-purple-950/50 via-slate-900 to-slate-900 border-purple-800/60'
+          : role === 'CONTROL_ROOM_OPERATOR'
+          ? 'bg-gradient-to-r from-blue-950/50 via-slate-900 to-slate-900 border-blue-800/60'
+          : 'bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border-emerald-800/60'
+      }`}>
+        <div className="flex items-center gap-3">
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm border shrink-0 ${
+            role === 'SUPER_ADMIN'
+              ? 'bg-purple-600/20 border-purple-500/40 text-purple-300 ring-2 ring-purple-500/20'
+              : role === 'CONTROL_ROOM_OPERATOR'
+              ? 'bg-blue-600/20 border-blue-500/40 text-blue-300 ring-2 ring-blue-500/20'
+              : 'bg-emerald-600/20 border-emerald-500/40 text-emerald-300 ring-2 ring-emerald-500/20'
+          }`}>
+            {user?.full_name?.charAt(0) || 'U'}
+          </div>
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <h2 className="text-sm sm:text-base font-bold text-white">
+                {user?.full_name || 'Operator Console'}
+              </h2>
+              <span className={`text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full border ${
+                role === 'SUPER_ADMIN'
+                  ? 'bg-purple-950 text-purple-300 border-purple-700'
+                  : role === 'CONTROL_ROOM_OPERATOR'
+                  ? 'bg-blue-950 text-blue-300 border-blue-700'
+                  : 'bg-emerald-950 text-emerald-300 border-emerald-700'
+              }`}>
+                {role?.replace(/_/g, ' ') || 'OPERATOR'}
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 mt-0.5">
+              {role === 'SUPER_ADMIN'
+                ? 'Executive Command & Full Plant Governance · Root Authority Active'
+                : role === 'CONTROL_ROOM_OPERATOR'
+                ? 'Control Room Operations · Live SCADA Ingestion & Incident Response Active'
+                : 'Frontline Worker · Field Production Safety Active'}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3 text-xs font-mono text-slate-400 self-start sm:self-auto">
+          <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] text-slate-300">USER: {user?.username}</span>
+          </span>
         </div>
       </div>
 

@@ -8,8 +8,8 @@ interface AuthContextType {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (username: string, password: string) => Promise<void>;
-  quickLogin: (role: UserRole) => Promise<void>;
+  login: (username: string, password: string) => Promise<string>;
+  quickLogin: (role: UserRole) => Promise<string>;
   logout: () => void;
 }
 
@@ -49,20 +49,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     initAuth();
   }, []);
 
-  const login = async (username: string, password: string) => {
+  const login = async (username: string, password: string): Promise<string> => {
     const res = await api.login({ username, password });
     localStorage.setItem('token', res.access_token);
     setToken(res.access_token);
     setRole(res.role as UserRole);
     const me = await api.getMe();
     setUser(me);
+    return res.role;
   };
 
-  const quickLogin = async (targetRole: UserRole) => {
+  const quickLogin = async (targetRole: UserRole): Promise<string> => {
     const creds = ROLE_CREDENTIALS[targetRole];
     if (creds) {
-      await login(creds.username, creds.pass);
+      return await login(creds.username, creds.pass);
     }
+    return '';
   };
 
   const logout = () => {

@@ -19,8 +19,12 @@ export const LoginPage: React.FC = () => {
     setError(null);
     setLoading(true);
     try {
-      await login(username, password);
-      navigate('/app/overview');
+      const userRole = await login(username, password);
+      if (userRole === 'WORKER') {
+        navigate('/worker');
+      } else {
+        navigate('/app/overview');
+      }
     } catch (err: any) {
       setError(err.message || 'Authentication failed. Please verify credentials.');
     } finally {
@@ -32,8 +36,8 @@ export const LoginPage: React.FC = () => {
     setError(null);
     setLoading(true);
     try {
-      await quickLogin(roleKey);
-      if (roleKey === 'WORKER') {
+      const userRole = await quickLogin(roleKey);
+      if (userRole === 'WORKER' || roleKey === 'WORKER') {
         navigate('/worker');
       } else {
         navigate('/app/overview');

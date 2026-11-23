@@ -110,31 +110,58 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
         <div className="relative">
           <button
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 pl-2 pr-2.5 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 border border-slate-700/80 text-xs transition-colors"
+            className="flex items-center gap-2 pl-2 pr-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-xs transition-colors shadow-sm"
           >
-            <div className="w-6 h-6 rounded-full bg-blue-600/30 border border-blue-500/50 flex items-center justify-center text-blue-400 font-bold">
+            <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs border ${
+              role === 'SUPER_ADMIN'
+                ? 'bg-purple-600/30 border-purple-500/50 text-purple-300 ring-2 ring-purple-500/20'
+                : role === 'CONTROL_ROOM_OPERATOR'
+                ? 'bg-blue-600/30 border-blue-500/50 text-blue-300 ring-2 ring-blue-500/20'
+                : 'bg-emerald-600/30 border-emerald-500/50 text-emerald-300 ring-2 ring-emerald-500/20'
+            }`}>
               {user?.full_name?.charAt(0) || 'U'}
             </div>
             <div className="text-left hidden sm:block">
-              <div className="text-slate-200 font-semibold truncate max-w-[110px]">{user?.full_name || 'Operator'}</div>
-              <div className="text-[10px] text-blue-400 font-mono tracking-tight">{role || 'USER'}</div>
+              <div className="text-slate-100 font-bold truncate max-w-[130px]">
+                {user?.full_name || 'Operator'}
+              </div>
+              <div className={`text-[10px] font-mono tracking-tight font-bold ${
+                role === 'SUPER_ADMIN'
+                  ? 'text-purple-400'
+                  : role === 'CONTROL_ROOM_OPERATOR'
+                  ? 'text-blue-400'
+                  : 'text-emerald-400'
+              }`}>
+                {role === 'SUPER_ADMIN' ? 'SUPER ADMIN' : role === 'CONTROL_ROOM_OPERATOR' ? 'OPERATOR' : role || 'USER'}
+              </div>
             </div>
             <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
           </button>
 
           {showUserMenu && (
-            <div className="absolute right-0 mt-2 w-56 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl py-2 z-50 text-xs animate-in fade-in slide-in-from-top-2 duration-150">
-              <div className="px-4 py-2 border-b border-slate-800">
-                <div className="font-semibold text-slate-200">{user?.full_name}</div>
+            <div className="absolute right-0 mt-2 w-64 rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl py-2 z-50 text-xs animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="px-4 py-3 border-b border-slate-800 space-y-1">
+                <div className="font-bold text-white text-sm">{user?.full_name}</div>
                 <div className="text-slate-400 text-[11px] truncate">{user?.email}</div>
-                <div className="mt-1 inline-block px-1.5 py-0.5 rounded text-[10px] font-mono bg-blue-950 text-blue-300 border border-blue-800">
-                  {role}
+                <div className="flex items-center gap-1.5 pt-1">
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border ${
+                    role === 'SUPER_ADMIN'
+                      ? 'bg-purple-950 text-purple-300 border-purple-800'
+                      : role === 'CONTROL_ROOM_OPERATOR'
+                      ? 'bg-blue-950 text-blue-300 border-blue-800'
+                      : 'bg-emerald-950 text-emerald-300 border-emerald-800'
+                  }`}>
+                    {role}
+                  </span>
+                  <span className="text-[10px] text-slate-400 font-medium">
+                    {user?.department || 'Operations'}
+                  </span>
                 </div>
               </div>
               <Link
                 to="/worker"
                 onClick={() => setShowUserMenu(false)}
-                className="w-full text-left px-4 py-2 text-slate-300 hover:bg-slate-800/80 flex items-center gap-2 transition-colors"
+                className="w-full text-left px-4 py-2.5 text-slate-300 hover:bg-slate-800/80 flex items-center gap-2 transition-colors"
               >
                 <Radio className="w-3.5 h-3.5 text-rose-400" />
                 Switch to Worker Mobile Portal
@@ -143,9 +170,9 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 onClick={() => {
                   setShowUserMenu(false);
                   logout();
-                  navigate('/');
+                  navigate('/login');
                 }}
-                className="w-full text-left px-4 py-2 text-rose-400 hover:bg-rose-950/30 flex items-center gap-2 transition-colors"
+                className="w-full text-left px-4 py-2.5 text-rose-400 hover:bg-rose-950/30 flex items-center gap-2 transition-colors border-t border-slate-800/80"
               >
                 <LogOut className="w-3.5 h-3.5" />
                 Sign Out

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AlertTriangle,
   Radio,
@@ -13,6 +13,7 @@ import {
   UserCheck,
   Footprints,
   PhoneCall,
+  LogOut,
 } from 'lucide-react';
 import { api } from '../../services/api';
 import { useAuth } from '../../context/AuthContext';
@@ -20,7 +21,8 @@ import { useWebSocket } from '../../context/WebSocketContext';
 import { StatusBadge } from '../../components/common/StatusBadge';
 
 export const WorkerPortalPage: React.FC = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const { isConnected, subscribe } = useWebSocket();
   const [selectedZone, setSelectedZone] = useState<number>(1);
   const [zones, setZones] = useState<any[]>([]);
@@ -145,7 +147,37 @@ export const WorkerPortalPage: React.FC = () => {
       </header>
 
       {/* Main Body */}
-      <div className="p-4 space-y-6 flex-1 overflow-y-auto">
+      <div className="p-4 space-y-5 flex-1 overflow-y-auto">
+        {/* Active Worker Profile Card */}
+        <div className="p-3.5 rounded-xl bg-gradient-to-r from-emerald-950/50 via-slate-900 to-slate-900 border border-emerald-800/40 flex items-center justify-between shadow-lg">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-emerald-600/20 border border-emerald-500/40 flex items-center justify-center font-black text-emerald-300 text-sm ring-2 ring-emerald-500/20 shrink-0">
+              {user?.full_name?.charAt(0) || 'W'}
+            </div>
+            <div>
+              <div className="flex flex-wrap items-center gap-1.5">
+                <span className="font-bold text-white text-xs">{user?.full_name || 'Alex Morgan'}</span>
+                <span className="px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-emerald-950 text-emerald-300 border border-emerald-800">
+                  {user?.role || 'WORKER'}
+                </span>
+              </div>
+              <div className="text-[10px] text-slate-400 mt-0.5">
+                {user?.department || 'Production Line Operations'} · Badge: {user?.username || 'worker'}
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              logout();
+              navigate('/login');
+            }}
+            className="p-2 rounded-lg bg-slate-900 hover:bg-rose-950/60 text-slate-400 hover:text-rose-400 border border-slate-800 hover:border-rose-800 transition-colors shrink-0"
+            title="Sign Out to Login"
+          >
+            <LogOut className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
         {/* Zone Selector & Check-In */}
         <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
           <div className="flex items-center justify-between text-xs">
