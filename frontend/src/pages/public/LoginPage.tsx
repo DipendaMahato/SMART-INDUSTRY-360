@@ -4,6 +4,8 @@ import { ShieldAlert, Lock, User, Key, ArrowRight, CheckCircle2, AlertCircle } f
 import { useAuth, ROLE_CREDENTIALS } from '../../context/AuthContext';
 import { UserRole } from '../../types';
 
+const ESSENTIAL_ROLES: UserRole[] = ['SUPER_ADMIN', 'CONTROL_ROOM_OPERATOR', 'WORKER'];
+
 export const LoginPage: React.FC = () => {
   const { login, quickLogin } = useAuth();
   const navigate = useNavigate();
@@ -109,13 +111,13 @@ export const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Role Login Grid for Seamless Testing */}
+          {/* Quick Role Login Grid (3 Essential Roles) */}
           <div className="pt-6 border-t border-slate-800 space-y-3">
             <div className="text-[11px] font-mono uppercase tracking-wider text-slate-400 text-center">
               Quick Role Evaluation (1-Click Login)
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              {(Object.keys(ROLE_CREDENTIALS) as UserRole[]).map((r) => {
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              {ESSENTIAL_ROLES.map((r) => {
                 const creds = ROLE_CREDENTIALS[r];
                 return (
                   <button
@@ -123,10 +125,14 @@ export const LoginPage: React.FC = () => {
                     type="button"
                     onClick={() => handleRoleClick(r)}
                     disabled={loading}
-                    className="p-2 rounded-lg bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-left transition-all text-[11px] disabled:opacity-50"
+                    className="p-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 hover:border-blue-500/40 text-center transition-all text-xs disabled:opacity-50 group hover:shadow-lg hover:shadow-blue-950/40"
                   >
-                    <div className="font-bold text-slate-200">{creds.title}</div>
-                    <div className="text-[10px] text-slate-400 font-mono">{creds.username}</div>
+                    <div className="font-bold text-slate-200 group-hover:text-blue-400 transition-colors">
+                      {creds.title}
+                    </div>
+                    <div className="text-[11px] text-slate-400 font-mono mt-0.5">
+                      {creds.username}
+                    </div>
                   </button>
                 );
               })}

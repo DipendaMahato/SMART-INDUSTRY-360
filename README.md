@@ -239,20 +239,15 @@ Once running, navigate to:
 
 ## 🔑 5. Pre-Configured Evaluation Accounts
 
-The platform automatically provisions 8 standard industrial roles. Use these accounts to evaluate different permission tiers:
+Use these 3 essential role accounts to evaluate different operational tiers:
 
 | Role | Username | Password | Purpose & Access Scope |
 | :--- | :--- | :--- | :--- |
-| **Super Administrator** | `superadmin` | `Admin@123` | Full system governance, RBAC permissions, audit inspection |
-| **Plant Administrator** | `plantadmin` | `Plant@123` | Plant facility configuration, zone limits, work order dispatch |
+| **Super Administrator** | `superadmin` | `Admin@123` | Full system administration, plant config, and governance |
 | **Control-Room Operator**| `operator` | `Operator@123` | Live telemetry monitoring, incident lifecycle, remote alarms |
-| **Safety Officer** | `safety` | `Safety@123` | Emergency escalation, evacuation management, muster tracking |
-| **Security Personnel** | `security` | `Security@123` | CCTV stream monitoring, AI human/PPE detection review |
-| **Maintenance Engineer** | `maintenance` | `Maint@123` | Rotating machinery vibration, RUL analysis, preventive maintenance |
-| **Frontline Worker** | `worker` | `Worker@123` | Worker portal, personal hazard reports, 1-tap SOS distress button |
-| **Auditor** | `auditor` | `Auditor@123` | Read-only compliance review, immutable tamper-evident logs |
+| **Frontline Worker** | `worker` | `Worker@123` | Mobile portal, personal hazard reports, 1-tap SOS distress button |
 
-> 💡 **Quick Login**: The `/login` page includes **1-click login buttons** for all roles to facilitate rapid evaluation.
+> 💡 **Quick Login**: The `/login` page includes **1-click login buttons** for these essential roles.
 
 ---
 
