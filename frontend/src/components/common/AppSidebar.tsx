@@ -5,7 +5,6 @@ import {
   Activity,
   Layers,
   Wrench,
-  TrendingUp,
   FileBarChart,
   ChevronLeft,
   ChevronRight,
@@ -32,12 +31,6 @@ export const AppSidebar: React.FC<AppSidebarProps> = ({ criticalCount = 0, alert
       group: 'Assets & Hardware',
       items: [
         { label: 'Equipment & Machines',  path: '/app/equipment',    icon: Wrench },
-      ],
-    },
-    {
-      group: 'Intelligence',
-      items: [
-        { label: 'Predictive Maintenance',path: '/app/maintenance',     icon: TrendingUp },
       ],
     },
     {

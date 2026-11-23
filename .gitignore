@@ -20,6 +20,12 @@ __pycache__/
 *serviceAccountKey*.json
 *firebase-adminsdk*.json
 
+# Machine Learning Weights & Checkpoints
+*.pt
+*.pth
+*.onnx
+*.bin
+
 # Logs & temp
 *.log
 .vscode/
