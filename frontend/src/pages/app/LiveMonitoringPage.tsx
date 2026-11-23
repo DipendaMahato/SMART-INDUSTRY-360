@@ -299,10 +299,20 @@ export const LiveMonitoringPage: React.FC<{ plantId: number }> = ({ plantId }) =
       {/* ── Content: Grid View ── */}
       {viewMode === 'GRID' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filteredDevices.length === 0 ? (
+          {devices.length === 0 ? (
+            <div className="col-span-full p-14 text-center rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl max-w-xl mx-auto">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-4">
+                <Radio className="w-7 h-7" />
+              </div>
+              <h3 className="text-base font-bold text-white">No Sensor Nodes Registered</h3>
+              <p className="text-xs text-slate-400 mt-1.5 max-w-sm mx-auto leading-relaxed">
+                All placeholder devices have been removed. Connect and register your real industrial IoT sensors, gas detectors, vibration probes, and gateways via the Devices page.
+              </p>
+            </div>
+          ) : filteredDevices.length === 0 ? (
             <div className="col-span-full p-12 text-center rounded-2xl bg-slate-900 border border-slate-800">
               <Radio className="w-10 h-10 text-slate-600 mx-auto mb-3" />
-              <h3 className="text-sm font-bold text-slate-300">No telemetry nodes found</h3>
+              <h3 className="text-sm font-bold text-slate-300">No telemetry nodes match your filter</h3>
               <p className="text-xs text-slate-500 mt-1">Try broadening your search query or status filter.</p>
             </div>
           ) : (
@@ -485,8 +495,16 @@ export const LiveMonitoringPage: React.FC<{ plantId: number }> = ({ plantId }) =
             <tbody className="divide-y divide-slate-800/60 font-sans">
               {filteredDevices.length === 0 ? (
                 <tr>
-                  <td colSpan={10} className="py-8 text-center text-slate-500">
-                    No sensor nodes found matching current filter.
+                  <td colSpan={10} className="py-12 text-center">
+                    <Radio className="w-10 h-10 text-slate-600 mx-auto mb-3" />
+                    <div className="text-sm font-bold text-slate-200">
+                      {devices.length === 0 ? 'No Sensor Nodes Registered' : 'No matching sensor nodes found'}
+                    </div>
+                    <div className="text-xs text-slate-500 mt-1">
+                      {devices.length === 0
+                        ? 'Register your real plant sensors on the Devices page to start live monitoring.'
+                        : 'Try adjusting your search or filter criteria.'}
+                    </div>
                   </td>
                 </tr>
               ) : (

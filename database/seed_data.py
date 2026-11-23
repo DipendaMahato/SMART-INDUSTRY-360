@@ -91,38 +91,8 @@ def seed_database(db: Session):
         zones.append(z)
     db.commit()
 
-    # 4. Devices & Sensors
-    devices_data = [
-        ("DEV-ENV-01", plant1.id, zones[0].id, "Milling Hall Temp & Humidity Station", "ENVIRONMENTAL_STATION", "ONLINE", -62, 98),
-        ("DEV-VIB-01", plant1.id, zones[0].id, "CNC Milling Spindle Vibration Node", "VIBRATION_SENSOR", "ONLINE", -68, 92),
-        ("DEV-GAS-01", plant1.id, zones[1].id, "Reactor Bay Combustible Gas Sniffer MQ-2", "GAS_DETECTOR", "ONLINE", -58, 95),
-        ("DEV-SMK-01", plant1.id, zones[1].id, "Chemical Solvent Smoke & Aerosol Detector", "ENVIRONMENTAL_STATION", "ONLINE", -60, 94),
-        ("DEV-SOS-01", plant1.id, zones[1].id, "Solvent Bay Physical E-Stop & SOS Pillar", "PHYSICAL_SOS", "ONLINE", -54, 100),
-        ("DEV-THM-01", plant1.id, zones[2].id, "HV Transformer Thermal Infrared Pod", "ENVIRONMENTAL_STATION", "ONLINE", -71, 88),
-        ("DEV-VIB-02", plant1.id, zones[3].id, "Robotic Arm KUKA Harmonic Vibration Probe", "VIBRATION_SENSOR", "ONLINE", -65, 91),
-        ("DEV-GW-01",  plant1.id, zones[5].id, "Primary Edge LoRaWAN & MQTT Industrial Gateway", "EDGE_GATEWAY", "ONLINE", -48, 100),
-        ("DEV-CAM-01", plant1.id, zones[1].id, "Explosion-Proof Dome Camera Cam-01", "CCTV_CAMERA", "ONLINE", -52, 100),
-        ("DEV-CAM-02", plant1.id, zones[2].id, "Restricted Yard Perimeter Camera Cam-02", "CCTV_CAMERA", "ONLINE", -55, 100),
-        ("DEV-ENV-02", plant1.id, zones[4].id, "Warehouse Ambient Air Quality Monitor", "ENVIRONMENTAL_STATION", "ONLINE", -64, 89),
-        ("DEV-SOS-02", plant1.id, zones[0].id, "Machining Hall Exit SOS Emergency Station", "PHYSICAL_SOS", "ONLINE", -59, 100),
-    ]
-
-    for did, pid, zid, dname, dtype, cstat, rssi, bat in devices_data:
-        d = Device(
-            device_id=did,
-            plant_id=pid,
-            zone_id=zid,
-            name=dname,
-            device_type=dtype,
-            connection_status=cstat,
-            signal_strength_dbm=rssi,
-            battery_percentage=bat,
-            firmware_version="v2.4.1-rc3",
-            ip_address=f"192.168.1.{100 + len(devices_data)}",
-            is_simulated=True
-        )
-        db.add(d)
-    db.commit()
+    # 4. Devices & Sensors (Clean empty slate - real sensors registered via portal)
+    # No placeholder/simulated devices seeded. Add real plant sensors via /devices API.
 
     # 5. Equipment Inventory (Clean empty slate - real equipment added via portal)
     # 6. Work Orders (Clean empty slate)
