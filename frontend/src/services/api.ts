@@ -87,6 +87,10 @@ export const api = {
 
   // Equipment
   getEquipment: (plantId = 1) => request<any[]>(`/equipment?plant_id=${plantId}`),
+  createEquipment: (equipment: any) =>
+    request<any>('/equipment', { method: 'POST', body: JSON.stringify(equipment) }),
+  deleteEquipment: (equipmentId: string) =>
+    request<any>(`/equipment/${equipmentId}`, { method: 'DELETE' }),
   getWorkOrders: () => request<any[]>('/equipment/work-orders/all'),
   createWorkOrder: (wo: any) => request<any>('/equipment/work-orders', { method: 'POST', body: JSON.stringify(wo) }),
   updateWorkOrder: (id: number, update: any) =>

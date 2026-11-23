@@ -124,56 +124,8 @@ def seed_database(db: Session):
         db.add(d)
     db.commit()
 
-    # 5. Equipment Inventory
-    equip_data = [
-        ("EQ-CNC-001", plant1.id, zones[0].id, "5-Axis High-Torque CNC Machining Center", "CNC_MACHINE", "OPERATIONAL", 96.2, 95.0, 97.4, 3840.0, 720.0, 2.5, 92),
-        ("EQ-BOIL-200", plant1.id, zones[1].id, "Industrial High-Pressure Steam Boiler 200 PSI", "BOILER", "OPERATIONAL", 91.8, 93.5, 90.1, 5120.0, 600.0, 4.0, 74),
-        ("EQ-COMP-04", plant1.id, zones[0].id, "Atlas Copco Rotary Screw Compressor 75kW", "COMPRESSOR", "OPERATIONAL", 88.4, 85.0, 91.8, 6400.0, 450.0, 3.2, 58),
-        ("EQ-PUMP-101", plant1.id, zones[1].id, "Centrifugal Solvent Transfer Feed Pump", "PUMP", "DEGRADED", 68.2, 61.0, 75.4, 7820.0, 320.0, 5.0, 24),
-        ("EQ-XFRM-01", plant1.id, zones[2].id, "Square D 33kV Step-Down Substation Transformer", "TRANSFORMER", "OPERATIONAL", 97.5, 98.0, 97.0, 12000.0, 2500.0, 8.0, 160),
-        ("EQ-ROBOT-01", plant1.id, zones[3].id, "KUKA KR-210 Heavy Industrial Articulated Robot", "ASSEMBLY", "OPERATIONAL", 94.0, 93.2, 94.8, 2900.0, 850.0, 1.8, 110),
-    ]
-
-    for eq_id, pid, zid, eq_name, cat, stat, hs, vh, th, hrs, mtbf, mttr, rul in equip_data:
-        eq = Equipment(
-            equipment_id=eq_id,
-            plant_id=pid,
-            zone_id=zid,
-            name=eq_name,
-            category=cat,
-            status=stat,
-            health_score=hs,
-            vibration_health=vh,
-            thermal_health=th,
-            hours_operated=hrs,
-            mtbf_hours=mtbf,
-            mttr_hours=mttr,
-            estimated_rul_days=rul
-        )
-        db.add(eq)
-    db.commit()
-
-    # 6. Work Orders
-    wo1 = WorkOrder(
-        work_order_number="WO-2026-0891",
-        equipment_id="EQ-PUMP-101",
-        title="Vibration Anomaly & Impeller Bearing Inspection",
-        description="Predictive maintenance model flagged harmonic deviation exceeding ISO 10816 Level C thresholds.",
-        priority="HIGH",
-        status="IN_PROGRESS",
-        assigned_to_user_id=users[5].id  # Carlos Rodriguez
-    )
-    wo2 = WorkOrder(
-        work_order_number="WO-2026-0892",
-        equipment_id="EQ-BOIL-200",
-        title="Quarterly Relief Valve Pressure & Seal Certification",
-        description="Mandatory ASME safety valve integrity check and hydrostatic leak test.",
-        priority="MEDIUM",
-        status="OPEN",
-        assigned_to_user_id=users[5].id
-    )
-    db.add_all([wo1, wo2])
-    db.commit()
+    # 5. Equipment Inventory (Clean empty slate - real equipment added via portal)
+    # 6. Work Orders (Clean empty slate)
 
     # 7. AI Models Metadata
     m1 = AIModelMetadata(

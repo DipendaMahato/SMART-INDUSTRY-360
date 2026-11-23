@@ -201,6 +201,21 @@ class WorkerOut(BaseModel):
     heart_rate: int
     body_temp: float
 
+class EquipmentCreate(BaseModel):
+    equipment_id: str
+    plant_id: int = 1
+    zone_id: int = 1
+    name: str
+    category: str
+    status: str = "OPERATIONAL"
+    health_score: float = 100.0
+    vibration_health: Optional[float] = 100.0
+    thermal_health: Optional[float] = 100.0
+    hours_operated: Optional[float] = 0.0
+    mtbf_hours: Optional[float] = 1000.0
+    mttr_hours: Optional[float] = 2.0
+    estimated_rul_days: Optional[int] = 180
+
 class EquipmentOut(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: int
